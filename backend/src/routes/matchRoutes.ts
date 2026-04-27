@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { getStore } from "../store/store";
+import { updateMatches } from "../jobs/updateMatches";
 
 const router = Router();
 
@@ -155,6 +156,21 @@ router.get("/debug", (req, res) => {
       insights: "/api/insights",
     },
   });
+});
+
+// Refresh matches on-demand
+router.post("/matches/refresh", async (req, res) => {
+  try {
+    await updateMatches();
+    const store = getStore();
+    res.json({ 
+      message: "Matches refreshed", 
+      matches: store.matches,
+      count: store.matches.length 
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to refresh matches" });
+  }
 });
 
 export default router;

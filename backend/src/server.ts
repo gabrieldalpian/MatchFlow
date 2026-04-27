@@ -31,10 +31,6 @@ app.use("/api", routes);
 const io = initSocket(server);
 setSocket(io);
 
-// Run job every 30s
-setInterval(updateMatches, 90000);
-updateMatches();
-
 const PORT = process.env.PORT || 4000;
 
 server.listen(PORT, () => {
