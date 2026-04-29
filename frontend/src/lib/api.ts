@@ -1,4 +1,4 @@
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
 
 export interface Team {
   id: number;
@@ -98,4 +98,9 @@ export async function getEvents(): Promise<MatchEvent[]> {
 export async function getInsights(): Promise<Insight[]> {
   const data = await fetchJSON<{ insights: Insight[] }>("/api/insights");
   return data.insights;
+}
+
+export async function refreshMatches(): Promise<void> {
+  const res = await fetch(`${API_BASE}/api/matches/refresh`, { method: "POST" });
+  if (!res.ok) throw new Error(`API error: ${res.status}`);
 }

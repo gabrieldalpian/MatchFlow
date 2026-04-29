@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { Match, MatchEvent, Insight, getMatches, getMatch } from "@/lib/api";
+import { Match, MatchEvent, Insight, getMatches, getMatch, refreshMatches } from "@/lib/api";
 import { usePolling } from "@/lib/usePolling";
 import Sidebar from "@/components/Sidebar";
 import MatchHeader from "@/components/MatchHeader";
@@ -19,15 +19,15 @@ export default function Dashboard() {
 
   // Refresh matches when page loads
   useEffect(() => {
-    const refreshMatches = async () => {
+    const refresh = async () => {
       try {
-        await fetch("/api/matches/refresh", { method: "POST" });
+        await refreshMatches();
       } catch (err) {
         console.log("Auto-refresh on load failed, using cached data");
       }
     };
-    
-    refreshMatches();
+
+    refresh();
   }, []);
 
   // Auto-select first live match
