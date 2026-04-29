@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { getStore } from "../store/store";
-import { updateMatches } from "../jobs/updateMatches";
+import { getStore } from "../store/store.js";
+import { updateMatches } from "../jobs/updateMatches.js";
 
 const router = Router();
 

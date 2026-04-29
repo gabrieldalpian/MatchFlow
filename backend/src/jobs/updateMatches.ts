@@ -1,6 +1,6 @@
-import { fetchMatches } from "../services/apiFootball";
-import { processMatches } from "../processors/matchProcessor";
-import { updateStore } from "../store/store";
+import { fetchMatches } from "../services/apiFootball.js";
+import { processMatches } from "../processors/matchProcessor.js";
+import { updateStore } from "../store/store.js";
 import { Server } from "socket.io";
 
 let io: Server | null = null;

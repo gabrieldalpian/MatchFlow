@@ -3,9 +3,9 @@ import cors from "cors";
 import http from "http";
 import dotenv from "dotenv";
 
-import routes from "./routes/matchRoutes";
-import { initSocket } from "./sockets/socket";
-import { updateMatches, setSocket } from "./jobs/updateMatches";
+import routes from "./routes/matchRoutes.js";
+import { initSocket } from "./sockets/socket.js";
+import { updateMatches, setSocket } from "./jobs/updateMatches.js";
 
 dotenv.config();
 
