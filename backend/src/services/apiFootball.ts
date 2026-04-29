@@ -247,21 +247,22 @@ export async function fetchMatches(): Promise<Match[]> {
       );
       console.error("Response:", error.response?.data);
 
-      // Check for domain restriction error
-      if (error.response?.data?.errors?.Ip) {
-        console.error(
-          "🚫 Domain Restriction Error:",
-          error.response.data.errors.Ip
-        );
-        console.error(
-          "ℹ️  Add your backend domain to allowed domains in the API dashboard"
-        );
+      if (error.response?.data && typeof error.response.data === 'object' && 'errors' in error.response.data) {
+        const data = error.response.data as any;
+        if (data.errors?.Ip) {
+          console.error(
+            "🚫 Domain Restriction Error:",
+            data.errors.Ip
+          );
+          console.error(
+            "ℹ️  Add your backend domain to allowed domains in the API dashboard"
+          );
+        }
       }
+    } else if (error instanceof Error) {
+      console.error("❌ Fetch matches error:", error.message);
     } else {
-      console.error(
-        "❌ Fetch matches error:",
-        error instanceof Error ? error.message : error
-      );
+      console.error("❌ Fetch matches error:", error);
     }
 
     return [];
