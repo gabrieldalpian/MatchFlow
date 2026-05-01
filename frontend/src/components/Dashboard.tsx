@@ -15,7 +15,7 @@ export default function Dashboard() {
   const [detailLoading, setDetailLoading] = useState(false);
 
   const matchesFetcher = useCallback(() => getMatches(), []);
-  const { data: matches, loading: matchesLoading } = usePolling(matchesFetcher, 900000); // 15 minutes
+  const { data: matches, loading: matchesLoading } = usePolling(matchesFetcher, 60000); // 1 minute
 
   // Refresh matches when page loads
   useEffect(() => {
@@ -54,7 +54,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     fetchDetail();
-    const interval = setInterval(fetchDetail, 900000);
+    const interval = setInterval(fetchDetail, 60000);
     return () => clearInterval(interval);
   }, [fetchDetail]);
 

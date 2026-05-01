@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 
 export function usePolling<T>(
   fetcher: () => Promise<T>,
-  intervalMs: number = 900000 // 15 minutes to avoid API rate limits
+  intervalMs: number = 60000 // 1 minute to avoid API rate limits
 ) {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
